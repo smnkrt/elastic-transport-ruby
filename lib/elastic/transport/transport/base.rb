@@ -314,8 +314,8 @@ module Elastic
 
             connection.dead!
 
-            if reload_on_failure && tries < connections.all.size
-              log_warn "[#{e.class}] Reloading connections (attempt #{tries} of #{connections.all.size})"
+            if reload_on_failure && tries < max_retries
+              log_warn "[#{e.class}] Reloading connections (attempt #{tries} of #{max_retries})"
               reload_connections! and retry
             end
 
